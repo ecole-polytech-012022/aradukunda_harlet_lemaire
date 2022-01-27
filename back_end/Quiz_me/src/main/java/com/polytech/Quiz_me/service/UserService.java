@@ -52,4 +52,14 @@ public class UserService {
         }
         return null;
     }
+
+    public boolean deleteUserById(Integer userId) {
+        for (User user : this.list) {
+            if (user.getId() == userId) {
+                this.list.remove(user);
+                return true;
+            }
+        }
+        return false;
+    }
 }
