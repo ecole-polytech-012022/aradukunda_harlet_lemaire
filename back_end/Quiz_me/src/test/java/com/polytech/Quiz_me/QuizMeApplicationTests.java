@@ -1,4 +1,4 @@
-package com.polytech.Quiz_me;
+/*package com.polytech.Quiz_me;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,3 +11,4 @@ class QuizMeApplicationTests {
 	}
 
 }
+*/
