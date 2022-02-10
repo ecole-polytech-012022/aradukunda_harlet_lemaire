@@ -4,6 +4,6 @@ import lombok.*;
 @Builder
 @Data
 public class UserDTO {
-    private String name;
-    private String email;
+    private Integer id;
+    private String pseudo;
 }

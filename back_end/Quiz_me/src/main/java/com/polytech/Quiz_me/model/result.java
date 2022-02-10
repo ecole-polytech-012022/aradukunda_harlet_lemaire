@@ -9,15 +9,23 @@ import javax.persistence.*; // import persistance library
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "users") // name of database table
-public class User {
-
+@Table(name = "results") // name of database table
+public class result {
+    
     @Id // annotation for ID column
     @GeneratedValue(strategy = GenerationType.IDENTITY) // strategy for ID, here it well be ID++
     @Column(length = 11) // column size on database side definition
-    private Integer id;
-    
-    @Column(name = "pseudo", nullable = false, length = 45) // database definiton => will launch SQL exception
-    // NB: words in name should be linked by underscore => name_of_column
-    private String pseudo;
+    private Integer id_result;
+
+    @Column(name="id_user") // column size on database side definition
+    private Integer id_user;  // TODO:: This will come from USER model
+
+    @Column(name="id_quiz") // column size on database side definition
+    private Integer id_quiz;  // TODO:: This will come from USER model
+
+    @Column(name = "result", length = 50)
+    private String result;
+
+
+
 }
