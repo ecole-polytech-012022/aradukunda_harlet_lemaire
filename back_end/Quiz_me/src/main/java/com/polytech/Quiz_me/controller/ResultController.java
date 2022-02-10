@@ -33,16 +33,16 @@ public class ResultController {
     @GetMapping("")
     public ResponseEntity<List<ResultDTO>> getAllResult() {
 
-        List<Result> result = ResultService.getAllResult();
-        List<ResultDTO> resultDtos = ResultMapper.toResultDTOList(Results);
+        List<Result> result = resultService.getAllResult();
+        List<ResultDTO> resultDtos = ResultMapper.toResultDTOList(result);
 
-        return ResponseEntity.ok(ResultsDtos);
+        return ResponseEntity.ok(resultDtos);
     }
 
     @GetMapping("/{ResultId}")
     public ResponseEntity<ResultDTO> getResultById(@PathVariable Integer ResultId) {
 
-        Result Result = ResultService.getResultById(ResultId);
+        Result Result = resultService.getResultById(ResultId);
 
         if (Result == null) {
             return ResponseEntity.notFound().build();
@@ -54,7 +54,7 @@ public class ResultController {
     @PostMapping("")
     public ResponseEntity<ResultDTO> createResult(@RequestBody ResultDTO dto) {
         Result fromDto = ResultMapper.toResult(dto);
-        Result createdResult = ResultService.createResult(fromDto);
+        Result createdResult = resultService.createResult(fromDto);
         if (createdResult == null) {
             return ResponseEntity.badRequest().build();
         }
@@ -64,7 +64,7 @@ public class ResultController {
 
     @DeleteMapping("/{ResultId}")
     public ResponseEntity<Boolean> deleteResultById(@PathVariable Integer ResultId) {
-        boolean response = ResultService.deleteResult(ResultId);
+        boolean response = resultService.deleteResult(ResultId);
         if (response == false) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }

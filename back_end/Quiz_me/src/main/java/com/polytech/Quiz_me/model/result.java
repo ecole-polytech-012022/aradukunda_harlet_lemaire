@@ -10,7 +10,7 @@ import javax.persistence.*; // import persistance library
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "results") // name of database table
-public class result {
+public class Result {
     
     @Id // annotation for ID column
     @GeneratedValue(strategy = GenerationType.IDENTITY) // strategy for ID, here it well be ID++

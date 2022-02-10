@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-import com.polytech.Quiz_me.model.result;
+import com.polytech.Quiz_me.model.Result;
 import com.polytech.Quiz_me.repository.ResultRepository;
 
 @Service

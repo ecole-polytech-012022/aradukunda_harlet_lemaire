@@ -15,7 +15,7 @@ import javax.persistence.*; // import persistance library
 @NoArgsConstructor
 @Table(name = "question") // name of database table
 
-public class question {
+public class Question {
 
     @Id // annotation for ID column
     @GeneratedValue(strategy = GenerationType.IDENTITY) // strategy for ID, here it well be ID++
@@ -31,7 +31,7 @@ public class question {
     @Column(name = "question",length=100) 
     private String question;
 
-
-
+    @Column(name = "response",length=100) 
+    private String response;
     
 }

@@ -33,7 +33,7 @@ public class QuestionController {
     @GetMapping("")
     public ResponseEntity<List<QuestionDTO>> getAllQuestions() {
 
-        List<Question> questions = questionService.getAllQuestions();
+        List<Question> questions = questionService.getAllQuestion();
         List<QuestionDTO> questionsDtos = QuestionMapper.toQuestionDTOList(questions);
 
         return ResponseEntity.ok(questionsDtos);

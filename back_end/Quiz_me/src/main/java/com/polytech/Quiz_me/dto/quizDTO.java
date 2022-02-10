@@ -7,7 +7,7 @@ import lombok.*;
 @Builder
 @Data
 
-public class quizDTO {
+public class QuizDTO {
     private Integer id_quiz;
     private String theme_quiz;
     private List<Integer> quest_list_id; 

@@ -9,8 +9,8 @@ public class UserMapper {
 
     public static UserDTO toUserDTO(User user) {
         return UserDTO.builder()
-                        .name(user.getName())
-                        .email(user.getEmail())
+                        .id(user.getId())
+                        .pseudo(user.getPseudo())
                         .build();
     }
 
@@ -24,8 +24,8 @@ public class UserMapper {
     
     public static User toUser(UserDTO dto) {
         return User.builder()
-                        .name(dto.getName())
-                        .email(dto.getEmail())
+                        .id(dto.getID())
+                        .pseudo(dto.getPseudo())
                         .build();
     }
 

@@ -14,7 +14,7 @@ import javax.persistence.*; // import persistance library
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "quiz") // name of database table
-public class quiz {
+public class Quiz {
     
     @Id // annotation for ID column
     @GeneratedValue(strategy = GenerationType.IDENTITY) // strategy for ID, here it well be ID++

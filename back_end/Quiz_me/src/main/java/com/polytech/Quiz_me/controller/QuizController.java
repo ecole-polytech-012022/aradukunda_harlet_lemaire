@@ -33,7 +33,7 @@ public class QuizController {
     @GetMapping("")
     public ResponseEntity<List<QuizDTO>> getAllQuizs() {
 
-        List<Quiz> quizs = quizService.getAllQuizs();
+        List<Quiz> quizs = quizService.getAllQuiz();
         List<QuizDTO> quizsDtos = QuizMapper.toQuizDTOList(quizs);
 
         return ResponseEntity.ok(quizsDtos);
