@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.*;
 
+import com.polytech.Quiz_me.dto.UserDTO;
+import com.polytech.Quiz_me.mapper.UserMapper;
 import com.polytech.Quiz_me.model.User;
 import com.polytech.Quiz_me.service.UserService;
 
@@ -29,34 +31,40 @@ public class UserController {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<User>> getAllUsers() {
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
 
-        return ResponseEntity.ok(userService.getAllUsers());
+        List<User> users = userService.getAllUsers();
+        List<UserDTO> usersDtos = UserMapper.toUserDTOList(users);
+
+        return ResponseEntity.ok(usersDtos);
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<User> getUserById(@PathVariable Integer userId) {
+    public ResponseEntity<UserDTO> getUserById(@PathVariable Integer userId) {
 
         User user = userService.getUserById(userId);
 
         if (user == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.notFound().build();
         } 
-
-        return ResponseEntity.ok(user);
+        UserDTO dto = UserMapper.toUserDTO(user);
+        return ResponseEntity.ok(dto);
     }
 
     @PostMapping("")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User createdUser = userService.createUser(user);
+    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO dto) {
+        User fromDto = UserMapper.toUser(dto);
+        User createdUser = userService.createUser(fromDto);
         if (createdUser == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok(user);
+        UserDTO createdUserDto = UserMapper.toUserDTO(createdUser);
+        return ResponseEntity.ok(createdUserDto);
     }
+
     @DeleteMapping("/{userId}")
     public ResponseEntity<Boolean> deleteUserById(@PathVariable Integer userId) {
-        boolean response = userService.deleteUserById(userId);
+        boolean response = userService.deleteUser(userId);
         if (response == false) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }

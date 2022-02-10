@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 import com.polytech.Quiz_me.model.User;
+import com.polytech.Quiz_me.repository.UserRepository;
 
 @Service
 public class UserService {
@@ -16,50 +17,50 @@ public class UserService {
         User user1 = new User();
         user1.setName("user1");
         user1.setEmail("mail@test.com");
-        user1.setId(this.id++);
 
         User user2 = new User();
         user2.setName("user2");
         user2.setEmail("mail2@test.com");
-        user2.setId(this.id++);
 
-        this.list.add(user1);
-        this.list.add(user2);
+        this.repository.save(user1);
+        this.repository.save(user2);
     }
 
     public List<User> getAllUsers() {
-        if (this.list.isEmpty()) {
-            this.initUsers();
-        }
-        return this.list;
+        return this.repository.findAll();
     }
 
     public User getUserById(Integer id) {
 
-        for (User user : this.list) {
-            if (user.getId() == id) {
-                return user;
-            }
+        Optional<User> found = this.repository.findById(id);
+
+        if (found.isPresent()) {
+            return found.get();
         }
         return null;
     }
 
     public User createUser(User givenUser) {
+
         if (givenUser.getName() != null && givenUser.getEmail() != null) {
-            givenUser.setId(this.id++);
-            this.list.add(givenUser);
-            return givenUser;
+            return this.repository.save(givenUser);
         }
         return null;
     }
 
-    public boolean deleteUserById(Integer userId) {
-        for (User user : this.list) {
-            if (user.getId() == userId) {
-                this.list.remove(user);
-                return true;
-            }
+    public boolean deleteUser(Integer userId) {
+        User found = getUserById(userId);
+        if (found != null) {
+            this.repository.deleteById(found.getId());
+            return true;
         }
         return false;
+    }
+
+    private final UserRepository repository;
+
+    public UserService(UserRepository repository) {
+        this.repository = repository;
+        this.initUsers();
     }
 }
