@@ -13,19 +13,6 @@ public class UserService {
     public List<User> list = new ArrayList<>();
     public Integer id = 1;
 
-    public void initUsers() {
-        User user1 = new User();
-        user1.setName("user1");
-        user1.setEmail("mail@test.com");
-
-        User user2 = new User();
-        user2.setName("user2");
-        user2.setEmail("mail2@test.com");
-
-        this.repository.save(user1);
-        this.repository.save(user2);
-    }
-
     public List<User> getAllUsers() {
         return this.repository.findAll();
     }
@@ -42,7 +29,7 @@ public class UserService {
 
     public User createUser(User givenUser) {
 
-        if (givenUser.getName() != null && givenUser.getEmail() != null) {
+        if (givenUser.getPseudo() != null) {
             return this.repository.save(givenUser);
         }
         return null;
@@ -61,6 +48,5 @@ public class UserService {
 
     public UserService(UserRepository repository) {
         this.repository = repository;
-        this.initUsers();
     }
 }
